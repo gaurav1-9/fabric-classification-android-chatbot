@@ -20,8 +20,9 @@ class AndroidChatbot extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.quicksandTextTheme(),
         textSelectionTheme: const TextSelectionThemeData(
-            selectionColor: AppColor.raisinBlack,
-            selectionHandleColor: AppColor.raisinBlack),
+          selectionColor: AppColor.raisinBlack,
+          selectionHandleColor: AppColor.raisinBlack,
+        ),
       ),
       home: const HomeScreen(),
     );

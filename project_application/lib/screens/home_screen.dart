@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/msgarea.dart';
@@ -20,6 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
       'text': "Hello there...\nHow can I help you?",
     },
   ];
+  void appendChats(Map chatMsg) {
+    setState(() {
+      msg.add(chatMsg);
+    });
+  }
+
   final TextEditingController userInput = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -57,10 +62,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   UserInput(
                     textController: userInput,
                     changeFunction: (value) {
-                      setState(() {
-                        userInput.text;
-                      });
+                      setState(
+                        () {
+                          userInput.text;
+                        },
+                      );
                     },
+                    msgAppender: appendChats,
                   ),
                 ],
               ),

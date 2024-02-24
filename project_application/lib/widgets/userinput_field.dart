@@ -6,15 +6,21 @@ import '../global_properties/app_colors.dart';
 class UserInput extends StatelessWidget {
   final TextEditingController textController;
   final ValueChanged changeFunction;
+  final Function msgAppender;
   const UserInput({
     required this.textController,
     required this.changeFunction,
+    required this.msgAppender,
     super.key,
   });
 
   void getText(BuildContext ctx) {
     if (textController.text.isNotEmpty) {
-      print("Input Value: ${textController.text}");
+      Map msgValue = {
+        'individual': 'user',
+        'text': textController.text,
+      };
+      msgAppender(msgValue);
       FocusScope.of(ctx).unfocus();
       textController.text = '';
     }
