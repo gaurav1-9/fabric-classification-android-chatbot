@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_application/widgets/errormsg.dart';
 
 import '../widgets/msgarea.dart';
 import '../widgets/userinput_field.dart';
@@ -13,23 +14,38 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController userInput = TextEditingController();
+  bool errMsg = false;
+
   List msg = [
     {
       'individual': 'bot',
       'text': "Hello there...\nHow can I help you?",
     },
   ];
+
   void appendChats(Map chatMsg) {
     setState(() {
       msg.add(chatMsg);
     });
   }
 
-  final TextEditingController userInput = TextEditingController();
+  void updateErrMsg(bool err) {
+    setState(() {
+      errMsg = err;
+    });
+    Future.delayed(Duration(seconds: 5), () {
+      setState(() {
+        errMsg = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    print("Error msg: $errMsg");
     double msgHeight = (MediaQuery.of(context).size.height -
-        (AppBar().preferredSize.height + 114) -
+        (AppBar().preferredSize.height + 117) -
         MediaQuery.of(context).padding.top);
     return Scaffold(
       backgroundColor: AppColor.jet,
@@ -44,37 +60,40 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 5,
         shadowColor: AppColor.mindaro,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 5,
+      body: ListView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        children: [
+          const SizedBox(
+            height: 5,
+          ),
+          MsgArea(
+            msgHeight: msgHeight,
+            msg: msg,
+          ),
+          ErrorMsg(
+            errorMsg: errMsg,
+          ),
+          Container(
+            padding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
+            child: Stack(
+              alignment: Alignment.centerRight,
+              children: [
+                UserInput(
+                  errFunction: updateErrMsg,
+                  textController: userInput,
+                  changeFunction: (value) {
+                    setState(
+                      () {
+                        userInput.text;
+                      },
+                    );
+                  },
+                  msgAppender: appendChats,
+                ),
+              ],
             ),
-            MsgArea(
-              msgHeight: msgHeight,
-              msg: msg,
-            ),
-            Container(
-              padding: const EdgeInsets.all(20),
-              child: Stack(
-                alignment: Alignment.centerRight,
-                children: [
-                  UserInput(
-                    textController: userInput,
-                    changeFunction: (value) {
-                      setState(
-                        () {
-                          userInput.text;
-                        },
-                      );
-                    },
-                    msgAppender: appendChats,
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

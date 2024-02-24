@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import '../global_properties/app_colors.dart';
 
@@ -7,7 +10,9 @@ class UserInput extends StatelessWidget {
   final TextEditingController textController;
   final ValueChanged changeFunction;
   final Function msgAppender;
+  final Function errFunction;
   const UserInput({
+    required this.errFunction,
     required this.textController,
     required this.changeFunction,
     required this.msgAppender,
@@ -22,7 +27,18 @@ class UserInput extends StatelessWidget {
       };
       msgAppender(msgValue);
       FocusScope.of(ctx).unfocus();
+      botResponse(textController.text);
       textController.text = '';
+    }
+  }
+
+  Future<void> botResponse(String txt) async {
+    final url = 'http://127.0.0.1:5000/chat?text_value=$txt';
+    try {
+      final response = await http.get(Uri.parse(url));
+      print("RESPONSE: ${jsonDecode(response.body)}");
+    } catch (e) {
+      errFunction(true);
     }
   }
 
