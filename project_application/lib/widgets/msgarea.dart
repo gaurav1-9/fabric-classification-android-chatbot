@@ -27,20 +27,21 @@ class MsgArea extends StatelessWidget {
                         10,
                       ),
                       decoration: BoxDecoration(
-                          color: (msg[index]['individual'] == 'bot')
-                              ? AppColor.mindaro
-                              : AppColor.raisinBlack,
-                          borderRadius: (msg[index]['individual'] == 'bot')
-                              ? const BorderRadius.only(
-                                  bottomRight: Radius.circular(15),
-                                  topLeft: Radius.circular(15),
-                                  topRight: Radius.circular(15),
-                                )
-                              : const BorderRadius.only(
-                                  bottomLeft: Radius.circular(15),
-                                  topLeft: Radius.circular(15),
-                                  topRight: Radius.circular(15),
-                                )),
+                        color: (msg[index]['individual'] == 'bot')
+                            ? AppColor.mindaro
+                            : AppColor.raisinBlack,
+                        borderRadius: (msg[index]['individual'] == 'bot')
+                            ? const BorderRadius.only(
+                                bottomRight: Radius.circular(15),
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                              )
+                            : const BorderRadius.only(
+                                bottomLeft: Radius.circular(15),
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                              ),
+                      ),
                       child: Text(
                         msg[index]['text']!,
                         style: TextStyle(
@@ -59,10 +60,9 @@ class MsgArea extends StatelessWidget {
               children: [
                 Center(
                   child: Container(
-                    width: 280,
+                    width: 295,
                     padding: const EdgeInsets.symmetric(
                       vertical: 10,
-                      horizontal: 5,
                     ),
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(
