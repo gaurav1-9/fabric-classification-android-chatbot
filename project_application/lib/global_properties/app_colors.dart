@@ -7,4 +7,5 @@ class AppColor {
   static const Color mindaro = Color(0xffabc853);
   static const Color tomato = Color(0xffff6347);
   static const Color peach = Color(0xffffa07a);
+  static const Color grey = Color(0xFF7C7C7C);
 }

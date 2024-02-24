@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project_application/widgets/msgarea.dart';
 
+import '../widgets/msgarea.dart';
+import '../widgets/userinput_field.dart';
 import '../global_properties/app_colors.dart';
 import '../widgets/appbar.dart';
 
@@ -12,113 +14,59 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController _msgController = TextEditingController();
   List msg = [
-    // {
-    //   'individual': 'user',
-    //   'text': "Hi from user1",
-    // },
-    // {
-    //   'individual': 'bot',
-    //   'text': "Hi from bot1",
-    // },
-    // {
-    //   'individual': 'user',
-    //   'text': "Hi from user2",
-    // },
-    // {
-    //   'individual': 'bot',
-    //   'text': "Hi from bot2",
-    // },
-    // {
-    //   'individual': 'user',
-    //   'text': "Hi from user3",
-    // },
-    // {
-    //   'individual': 'bot',
-    //   'text': "Hi from bot3",
-    // },
-    // {
-    //   'individual': 'user',
-    //   'text': "Hi from user",
-    // },
-    // {
-    //   'individual': 'bot',
-    //   'text': "Hi from bot",
-    // },
-    // {
-    //   'individual': 'user',
-    //   'text': "Hi from user",
-    // },
-    // {
-    //   'individual': 'bot',
-    //   'text': "Hi from bot",
-    // },
-    // {
-    //   'individual': 'user',
-    //   'text': "Hi from user",
-    // },
-    // {
-    //   'individual': 'bot',
-    //   'text': "Hi from bot",
-    // },
-    // {
-    //   'individual': 'user',
-    //   'text': "Hi from user",
-    // },
-    // {
-    //   'individual': 'bot',
-    //   'text': "Hi from bot",
-    // },
-    // {
-    //   'individual': 'user',
-    //   'text': "Hi from user",
-    // },
-    // {
-    //   'individual': 'bot',
-    //   'text': "Hi from bot",
-    // },
-    // {
-    //   'individual': 'user',
-    //   'text': "Hi from user",
-    // },
-    // {
-    //   'individual': 'bot',
-    //   'text': "Hi from bot",
-    // },
+    {
+      'individual': 'bot',
+      'text': "Hello there...\nHow can I help you?",
+    },
   ];
+  final TextEditingController userInput = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    print(AppBar().preferredSize.height + 34);
-    print(MediaQuery.of(context).padding.top);
     double msgHeight = (MediaQuery.of(context).size.height -
-        (AppBar().preferredSize.height + 34) -
+        (AppBar().preferredSize.height + 114) -
         MediaQuery.of(context).padding.top);
     return Scaffold(
       backgroundColor: AppColor.jet,
-      appBar: (msg.isNotEmpty)
-          ? AppBar(
-              toolbarHeight: 80,
-              backgroundColor: AppColor.mindaro,
-              title: const AppbarContent(
-                txtColor: AppColor.textColor,
-                txtColorSecondary: AppColor.raisinBlack,
-                alignment: MainAxisAlignment.start,
+      appBar: AppBar(
+        toolbarHeight: 80,
+        backgroundColor: AppColor.mindaro,
+        title: const AppbarContent(
+          txtColor: AppColor.textColor,
+          txtColorSecondary: AppColor.raisinBlack,
+          alignment: MainAxisAlignment.start,
+        ),
+        elevation: 5,
+        shadowColor: AppColor.mindaro,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 5,
+            ),
+            MsgArea(
+              msgHeight: msgHeight,
+              msg: msg,
+            ),
+            Container(
+              padding: const EdgeInsets.all(20),
+              child: Stack(
+                alignment: Alignment.centerRight,
+                children: [
+                  UserInput(
+                    textController: userInput,
+                    changeFunction: (value) {
+                      setState(() {
+                        userInput.text;
+                      });
+                    },
+                  ),
+                ],
               ),
-              elevation: 5,
-              shadowColor: AppColor.mindaro,
             )
-          : null,
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 5,
-          ),
-          MsgArea(
-            msgHeight: msgHeight,
-            msg: msg,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
