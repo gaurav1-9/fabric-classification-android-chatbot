@@ -14,78 +14,78 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _msgController = TextEditingController();
   List msg = [
-    {
-      'individual': 'user',
-      'text': "Hi from user1",
-    },
-    {
-      'individual': 'bot',
-      'text': "Hi from bot1",
-    },
-    {
-      'individual': 'user',
-      'text': "Hi from user2",
-    },
-    {
-      'individual': 'bot',
-      'text': "Hi from bot2",
-    },
-    {
-      'individual': 'user',
-      'text': "Hi from user3",
-    },
-    {
-      'individual': 'bot',
-      'text': "Hi from bot3",
-    },
-    {
-      'individual': 'user',
-      'text': "Hi from user",
-    },
-    {
-      'individual': 'bot',
-      'text': "Hi from bot",
-    },
-    {
-      'individual': 'user',
-      'text': "Hi from user",
-    },
-    {
-      'individual': 'bot',
-      'text': "Hi from bot",
-    },
-    {
-      'individual': 'user',
-      'text': "Hi from user",
-    },
-    {
-      'individual': 'bot',
-      'text': "Hi from bot",
-    },
-    {
-      'individual': 'user',
-      'text': "Hi from user",
-    },
-    {
-      'individual': 'bot',
-      'text': "Hi from bot",
-    },
-    {
-      'individual': 'user',
-      'text': "Hi from user",
-    },
-    {
-      'individual': 'bot',
-      'text': "Hi from bot",
-    },
-    {
-      'individual': 'user',
-      'text': "Hi from user",
-    },
-    {
-      'individual': 'bot',
-      'text': "Hi from bot",
-    },
+    // {
+    //   'individual': 'user',
+    //   'text': "Hi from user1",
+    // },
+    // {
+    //   'individual': 'bot',
+    //   'text': "Hi from bot1",
+    // },
+    // {
+    //   'individual': 'user',
+    //   'text': "Hi from user2",
+    // },
+    // {
+    //   'individual': 'bot',
+    //   'text': "Hi from bot2",
+    // },
+    // {
+    //   'individual': 'user',
+    //   'text': "Hi from user3",
+    // },
+    // {
+    //   'individual': 'bot',
+    //   'text': "Hi from bot3",
+    // },
+    // {
+    //   'individual': 'user',
+    //   'text': "Hi from user",
+    // },
+    // {
+    //   'individual': 'bot',
+    //   'text': "Hi from bot",
+    // },
+    // {
+    //   'individual': 'user',
+    //   'text': "Hi from user",
+    // },
+    // {
+    //   'individual': 'bot',
+    //   'text': "Hi from bot",
+    // },
+    // {
+    //   'individual': 'user',
+    //   'text': "Hi from user",
+    // },
+    // {
+    //   'individual': 'bot',
+    //   'text': "Hi from bot",
+    // },
+    // {
+    //   'individual': 'user',
+    //   'text': "Hi from user",
+    // },
+    // {
+    //   'individual': 'bot',
+    //   'text': "Hi from bot",
+    // },
+    // {
+    //   'individual': 'user',
+    //   'text': "Hi from user",
+    // },
+    // {
+    //   'individual': 'bot',
+    //   'text': "Hi from bot",
+    // },
+    // {
+    //   'individual': 'user',
+    //   'text': "Hi from user",
+    // },
+    // {
+    //   'individual': 'bot',
+    //   'text': "Hi from bot",
+    // },
   ];
   @override
   Widget build(BuildContext context) {
@@ -96,22 +96,28 @@ class _HomeScreenState extends State<HomeScreen> {
         MediaQuery.of(context).padding.top);
     return Scaffold(
       backgroundColor: AppColor.jet,
-      appBar: AppBar(
-        toolbarHeight: 80,
-        backgroundColor: AppColor.mindaro,
-        title: const AppbarContent(AppColor.textColor, AppColor.raisinBlack),
-        elevation: 5,
-        shadowColor: AppColor.mindaro,
-      ),
+      appBar: (msg.isNotEmpty)
+          ? AppBar(
+              toolbarHeight: 80,
+              backgroundColor: AppColor.mindaro,
+              title: const AppbarContent(
+                txtColor: AppColor.textColor,
+                txtColorSecondary: AppColor.raisinBlack,
+                alignment: MainAxisAlignment.start,
+              ),
+              elevation: 5,
+              shadowColor: AppColor.mindaro,
+            )
+          : null,
       body: Column(
         children: [
           const SizedBox(
-            height: 10,
+            height: 5,
           ),
           MsgArea(
             msgHeight: msgHeight,
             msg: msg,
-          )
+          ),
         ],
       ),
     );
