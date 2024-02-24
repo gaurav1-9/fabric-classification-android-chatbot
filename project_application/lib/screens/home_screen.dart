@@ -31,19 +31,25 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void updateErrMsg(bool err) {
-    setState(() {
-      errMsg = err;
-    });
-    Future.delayed(Duration(seconds: 5), () {
-      setState(() {
-        errMsg = false;
-      });
-    });
+    setState(
+      () {
+        errMsg = err;
+      },
+    );
+    Future.delayed(
+      const Duration(seconds: 5),
+      () {
+        setState(
+          () {
+            errMsg = false;
+          },
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    print("Error msg: $errMsg");
     double msgHeight = (MediaQuery.of(context).size.height -
         (AppBar().preferredSize.height + 117) -
         MediaQuery.of(context).padding.top);
