@@ -30,10 +30,18 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void popTempChat() {
+  Future<void> popTempChat() async {
     setState(() {
-      msg.removeLast();
+      msg.last['text'] = 'Thinking...\nTaking longer than usual';
     });
+
+    await Future.delayed(const Duration(seconds: 5), () {
+      setState(() {
+        msg.removeLast();
+      });
+    });
+
+    updateErrMsg(true);
   }
 
   void updateErrMsg(bool err) {

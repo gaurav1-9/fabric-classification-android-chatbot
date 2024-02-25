@@ -58,7 +58,6 @@ class UserInput extends StatelessWidget {
       msgAppender(botResponse);
     } catch (e) {
       msgPoper();
-      errFunction(true);
     }
   }
 
