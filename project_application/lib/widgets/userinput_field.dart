@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:lucide_icons/lucide_icons.dart';
 
 import '../global_properties/app_colors.dart';
 
@@ -63,49 +64,65 @@ class UserInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: textController,
-      decoration: InputDecoration(
-        suffixIcon: IconButton(
-          icon: Icon(
-            CupertinoIcons.arrow_up_square_fill,
-            color: (textController.text.isNotEmpty)
-                ? AppColor.mindaro
-                : AppColor.grey,
-            size: 32,
+    return Stack(
+      alignment: Alignment.centerRight,
+      children: [
+        TextField(
+          controller: textController,
+          decoration: const InputDecoration(
+            contentPadding: EdgeInsets.fromLTRB(10, 0, 90, 0),
+            hintText: "Enter text here...",
+            hintStyle: TextStyle(
+              color: AppColor.grey,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColor.grey,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColor.mindaro,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
           ),
-          onPressed: () => getText(context),
-        ),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 10,
-        ),
-        hintText: "Enter text here...",
-        hintStyle: const TextStyle(
-          color: AppColor.grey,
-        ),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColor.grey,
+          style: const TextStyle(
+            color: AppColor.textColor,
+            fontSize: 20,
           ),
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-          ),
+          cursorColor: AppColor.textColor,
+          onChanged: changeFunction,
         ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColor.mindaro,
-          ),
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            IconButton(
+              icon: const Icon(
+                LucideIcons.imagePlus,
+                color: AppColor.grey,
+                size: 30,
+              ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(
+                CupertinoIcons.arrow_up_square_fill,
+                color: (textController.text.isNotEmpty)
+                    ? AppColor.mindaro
+                    : AppColor.grey,
+                size: 32,
+              ),
+              onPressed: () => getText(context),
+            ),
+          ],
         ),
-      ),
-      style: const TextStyle(
-        color: AppColor.textColor,
-        fontSize: 20,
-      ),
-      cursorColor: AppColor.textColor,
-      onChanged: changeFunction,
+      ],
     );
   }
 }
