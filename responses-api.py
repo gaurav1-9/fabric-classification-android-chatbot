@@ -60,34 +60,19 @@ def intent_response(intent):
     selected_value = random.randint(0, 4)
     if intent == 'greet':
         greet_response = [
-            [
-                ["Hello there!"],
-                ["How can I assist you today?"]
-            ],
-            [
-                ["Hi!"],
-                ["How can I help you?"]
-            ],
-            [
-                ["Hey, how's it going?"],
-                ["What can I do for you?"]
-            ],
-            [
-                ["Hey, nice to meet you!"],
-                ["What can I assist you with today?"]
-            ],
-            [
-                ["Hello!"],
-                ["How can I be of service to you?"]
-            ]
+                "Hello there!\nHow can I assist you today?",
+                "Hi!\nHow can I help you?",
+                "Hey, how's it going?\nWhat can I do for you?",
+                "Hey, nice to meet you!\nWhat can I assist you with today?",
+                "Hello!\nHow can I be of service to you?"
         ]
         return greet_response[selected_value % len(greet_response)], intent
     if intent == 'bye':
         bye_response = [
-            ["Bye...happy to help"],
-            ["Goodbye! Have a wonderful day ahead."],
-            ["Goodbye!"],
-            ["Take care and see you soon!"]
+            "Bye...happy to help",
+            "Goodbye!\nHave a wonderful day ahead.",
+            "Goodbye!",
+            "Take care and see you soon!"
         ]
         return bye_response[selected_value % len(bye_response)], intent
     if intent == 'image_upload':
@@ -95,18 +80,15 @@ def intent_response(intent):
     if intent == 'time':
         return '', intent
     if intent == 'web_master':
-        web_master_response = [
-            ['Ooh you know him too?'], 
-            ['He is my creator...I owe my existence to him']
-        ]
+        web_master_response = 'Ooh you know him too?\nHe is my creator...\nI owe my existence to him'
         return web_master_response, intent
     if intent == 'unknown':
         unknown_response = [
-            ["I'm sorry, I don't have information on that."],
-            ["I don't have the answer to that at the moment."],
-            ["That's beyond my current knowledge."],
-            ["I'm not equipped to handle that query right now."],
-            ["I'm sorry, didn't understood your question"]
+            "I'm sorry,\nI don't have information on that.",
+            "I don't have the answer\nto that at the moment.",
+            "That's beyond my current\nknowledge.",
+            "I'm not equipped to\nhandle that query right now.",
+            "I'm sorry\nI didn't understood your question"
         ]
         return unknown_response[selected_value % len(unknown_response)], intent
 

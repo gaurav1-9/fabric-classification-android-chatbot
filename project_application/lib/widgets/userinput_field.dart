@@ -10,12 +10,14 @@ class UserInput extends StatelessWidget {
   final TextEditingController textController;
   final ValueChanged changeFunction;
   final Function msgAppender;
+  final Function msgPoper;
   final Function errFunction;
   const UserInput({
     required this.errFunction,
     required this.textController,
     required this.changeFunction,
     required this.msgAppender,
+    required this.msgPoper,
     super.key,
   });
 
@@ -33,11 +35,28 @@ class UserInput extends StatelessWidget {
   }
 
   Future<void> botResponse(String txt) async {
-    final url = 'http://127.0.0.1:5000/chat?text_value=$txt';
+    final url =
+        'http://192.168.192.146:65432/chat?text_value=$txt'; //Change the IP
+    Map loadingBotResponse = {
+      'individual': 'bot',
+      'text': 'Thinking...',
+    };
+    msgAppender(loadingBotResponse);
+    print("Before RESPONSE\n$url");
+
     try {
-      final response = await http.get(Uri.parse(url));
-      print("RESPONSE: ${jsonDecode(response.body)}");
+      final response =
+          await http.get(Uri.parse(url)).timeout(const Duration(seconds: 5));
+      Map responseBody = jsonDecode(response.body);
+      print("RESPONSE: ${responseBody['bot_response']}");
+      Map botResponse = {
+        'individual': 'bot',
+        'text': responseBody['bot_response'],
+      };
+      msgPoper();
+      msgAppender(botResponse);
     } catch (e) {
+      msgPoper();
       errFunction(true);
     }
   }

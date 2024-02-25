@@ -30,6 +30,12 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void popTempChat() {
+    setState(() {
+      msg.removeLast();
+    });
+  }
+
   void updateErrMsg(bool err) {
     setState(
       () {
@@ -95,6 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                   msgAppender: appendChats,
+                  msgPoper: popTempChat,
                 ),
               ],
             ),

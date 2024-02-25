@@ -43,10 +43,10 @@ class MsgArea extends StatelessWidget {
                 child: Text(
                   msg[index]['text']!,
                   style: TextStyle(
-                    color: (msg[index]['individual'] == 'bot')
-                        ? AppColor.jet
-                        : AppColor.mindaro,
-                  ),
+                      color: (msg[index]['individual'] == 'bot')
+                          ? AppColor.jet
+                          : AppColor.mindaro,
+                      overflow: TextOverflow.ellipsis),
                 ),
               ),
             ],
