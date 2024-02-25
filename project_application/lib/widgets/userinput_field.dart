@@ -47,17 +47,17 @@ class UserInput extends StatelessWidget {
 
     try {
       final response =
-          await http.get(Uri.parse(url)).timeout(const Duration(seconds: 5));
+          await http.get(Uri.parse(url)).timeout(const Duration(seconds: 3));
       Map responseBody = jsonDecode(response.body);
       print("RESPONSE: ${responseBody['bot_response']}");
       Map botResponse = {
         'individual': 'bot',
         'text': responseBody['bot_response'],
       };
-      msgPoper();
+      msgPoper(false);
       msgAppender(botResponse);
     } catch (e) {
-      msgPoper();
+      msgPoper(true);
     }
   }
 
