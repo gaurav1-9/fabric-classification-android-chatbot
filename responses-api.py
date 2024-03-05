@@ -130,6 +130,6 @@ def filter_response():
     return jsonify(processed_flt_response)
 
 if __name__ == '__main__':
-    host= '192.168.192.146'
+    host= '192.168.43.246'
     port=65432
     app.run(debug=True,host=host,port=port)

@@ -37,7 +37,7 @@ class UserInput extends StatelessWidget {
 
   Future<void> botResponse(String txt) async {
     final url =
-        'http://192.168.192.146:65432/chat?text_value=$txt'; //Change the IP
+        'http://192.168.43.246:65432/chat?text_value=$txt'; //Change the IP
     Map loadingBotResponse = {
       'individual': 'bot',
       'text': 'Thinking...',
