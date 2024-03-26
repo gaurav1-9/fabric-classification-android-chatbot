@@ -13,6 +13,7 @@ class UserInput extends StatelessWidget {
   final Function msgAppender;
   final Function msgPoper;
   final Function errFunction;
+  final Function imgPicker;
   const UserInput({
     required this.errFunction,
     required this.textController,
@@ -20,6 +21,7 @@ class UserInput extends StatelessWidget {
     required this.msgAppender,
     required this.msgPoper,
     super.key,
+    required this.imgPicker,
   });
 
   void getText(BuildContext ctx) {
@@ -43,19 +45,22 @@ class UserInput extends StatelessWidget {
       'text': 'Thinking...',
     };
     msgAppender(loadingBotResponse);
-    print("Before RESPONSE\n$url");
 
     try {
       final response =
           await http.get(Uri.parse(url)).timeout(const Duration(seconds: 3));
       Map responseBody = jsonDecode(response.body);
-      print("RESPONSE: ${responseBody['bot_response']}");
-      Map botResponse = {
-        'individual': 'bot',
-        'text': responseBody['bot_response'],
-      };
-      msgPoper(false);
-      msgAppender(botResponse);
+      if (responseBody['response_type'] != 'image_upload') {
+        Map botResponse = {
+          'individual': 'bot',
+          'text': responseBody['bot_response'],
+        };
+        msgPoper(false);
+        msgAppender(botResponse);
+      } else {
+        msgPoper(false);
+        imgPicker();
+      }
     } catch (e) {
       msgPoper(true);
     }
@@ -107,7 +112,9 @@ class UserInput extends StatelessWidget {
                 color: AppColor.grey,
                 size: 30,
               ),
-              onPressed: () {},
+              onPressed: () {
+                imgPicker();
+              },
             ),
             IconButton(
               icon: Icon(

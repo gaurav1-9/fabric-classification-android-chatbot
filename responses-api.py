@@ -29,7 +29,7 @@ def text_processing(text):
 def get_intent(tokens):
     greet_keyword = ['hello', 'hi', 'hey', 'start', 'initiate']
     bye_keyword = ['bye', 'goodbye', 'exit', 'terminate', 'end','close','stop','later']
-    image_keyword = ['image', 'upload', 'picture', 'pic', 'img']
+    image_keyword = ['image', 'upload', 'picture', 'pic', 'img','textile']
     webmaster_keyword = ['gaurav', 'wrishav','gkd']
     time_keyword = ['time','clock','date','month','day']
 
@@ -76,8 +76,6 @@ def intent_response(intent):
         ]
         return bye_response[selected_value % len(bye_response)], intent
     if intent == 'image_upload':
-        return '', intent
-    if intent == 'time':
         return '', intent
     if intent == 'web_master':
         web_master_response = 'Ooh you know him too?\nHe is my creator...\nI owe my existence to him'

@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:project_application/widgets/errormsg.dart';
 
 import '../widgets/msgarea.dart';
@@ -23,6 +26,27 @@ class _HomeScreenState extends State<HomeScreen> {
       'text': "Hello there...\nHow can I help you?",
     },
   ];
+
+  File? _image;
+
+  Future<void> _getImageFromGallery() async {
+    setState(() {
+      _image = null;
+    });
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+        msg.add({
+          'individual': 'user_img',
+          'img': _image,
+        });
+      }
+      print('Image name: ${_image?.path.split("/").last}');
+    });
+  }
 
   void appendChats(Map chatMsg) {
     setState(() {
@@ -75,6 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
     double msgHeight = (MediaQuery.of(context).size.height -
         (AppBar().preferredSize.height + 117) -
         MediaQuery.of(context).padding.top);
+
     return Scaffold(
       backgroundColor: AppColor.jet,
       appBar: AppBar(
@@ -88,18 +113,25 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 5,
         shadowColor: AppColor.mindaro,
       ),
-      body: ListView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      body: Column(
         children: [
-          const SizedBox(
-            height: 5,
-          ),
-          MsgArea(
-            msgHeight: msgHeight,
-            msg: msg,
-          ),
-          ErrorMsg(
-            errorMsg: errMsg,
+          Expanded(
+            child: ListView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              children: [
+                const SizedBox(
+                  height: 5,
+                ),
+                MsgArea(
+                  msgHeight: msgHeight,
+                  msg: msg,
+                  image: _image,
+                ),
+                ErrorMsg(
+                  errorMsg: errMsg,
+                ),
+              ],
+            ),
           ),
           Container(
             padding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
@@ -118,6 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   msgAppender: appendChats,
                   msgPoper: popTempChat,
+                  imgPicker: () => _getImageFromGallery(),
                 ),
               ],
             ),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../global_properties/app_colors.dart';
@@ -5,7 +7,13 @@ import '../global_properties/app_colors.dart';
 class MsgArea extends StatelessWidget {
   final double msgHeight;
   final List msg;
-  const MsgArea({required this.msgHeight, required this.msg, super.key});
+  final File? image;
+  const MsgArea({
+    required this.msgHeight,
+    required this.msg,
+    super.key,
+    this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +48,19 @@ class MsgArea extends StatelessWidget {
                           topRight: Radius.circular(15),
                         ),
                 ),
-                child: Text(
-                  msg[index]['text']!,
-                  style: TextStyle(
-                      color: (msg[index]['individual'] == 'bot')
-                          ? AppColor.jet
-                          : AppColor.mindaro,
-                      overflow: TextOverflow.ellipsis),
-                ),
+                child: (msg[index]['img'] == null)
+                    ? Text(
+                        msg[index]['text']!,
+                        style: TextStyle(
+                            color: (msg[index]['individual'] == 'bot')
+                                ? AppColor.jet
+                                : AppColor.mindaro,
+                            overflow: TextOverflow.ellipsis),
+                      )
+                    : Image.file(
+                        msg[index]['img'],
+                        scale: 10,
+                      ),
               ),
             ],
           ));

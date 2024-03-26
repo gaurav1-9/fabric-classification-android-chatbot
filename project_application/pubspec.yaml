@@ -38,6 +38,7 @@ dependencies:
   lucide_icons: ^0.257.0
   google_fonts: ^6.1.0
   http: ^1.2.1
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:
