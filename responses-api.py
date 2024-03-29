@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
@@ -11,8 +12,7 @@ from nltk.tokenize import word_tokenize
 import sys
 sys.path.append('D:/code/7th_sem')
 # sys.path.append('e:/Programming/VS CODE/Python/7th_sem')
-from Classification.Test import VerificationOfMugaAndTassUsingCNN_save_model as ip
-from Classification.Filters import flt
+from Classification import VerificationOfMugaAndTassUsingCNN_save_model as ip
 
 app = Flask(__name__)
 CORS(app)
@@ -105,27 +105,34 @@ def chatbot():
     return jsonify(chat_response)
 
 
-@app.route("/image", methods=['GET'])
-def img_response():
-    file_name = request.args.get('image_name')
-    image_response = ip.predict_loaded_model(file_name)
+# @app.route("/image", methods=['GET'])
+# def img_response():
+#     file_name = request.args.get('image_name')
 
+#     processed_image_response = {
+#         'image_name': file_name,
+#         'bot_response': image_response
+#     }
+#     return jsonify(processed_image_response)
+@app.route("/image", methods=['POST'])
+def img_response():
+    if 'image' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+
+    file = request.files['image']
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+
+    filename = os.path.join(r'D:\code\8th_Sem\fabric-classification-android-chatbot\Classification\saved_img', 'uploadedImage.jpg')
+    file.save(filename)
+    image_response_CNN = ip.predict_loaded_modelCNN()
+    image_response_resNet = ip.predict_loaded_model_resNET()
     processed_image_response = {
-        'image_name': file_name,
-        'bot_response': image_response
+        'bot_response_CNN': image_response_CNN,
+        'bot_response_resNet': image_response_resNet[0],
+        'acc_resNet': f"{100*image_response_resNet[1]:.3}"
     }
     return jsonify(processed_image_response)
-
-
-@app.route("/filter",methods=['GET'])
-def filter_response():
-    image_file_name = request.args.get('image_name')
-    flt_response = flt.img_processing(image_file_name)
-    app.logger.info(image_file_name)
-    processed_flt_response = {
-        'status': 'success'
-    }
-    return jsonify(processed_flt_response)
 
 if __name__ == '__main__':
     host= '192.168.43.246'

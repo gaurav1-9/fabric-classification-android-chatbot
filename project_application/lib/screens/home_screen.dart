@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_application/widgets/errormsg.dart';
+import 'package:http/http.dart' as http;
 
 import '../widgets/msgarea.dart';
 import '../widgets/userinput_field.dart';
@@ -19,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController userInput = TextEditingController();
   bool errMsg = false;
+  bool imgLoading = false;
 
   List msg = [
     {
@@ -33,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _image = null;
     });
+
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
@@ -44,8 +48,52 @@ class _HomeScreenState extends State<HomeScreen> {
           'img': _image,
         });
       }
-      print('Image name: ${_image?.path.split("/").last}');
+      _uploadImage();
     });
+  }
+
+  Future<void> _uploadImage() async {
+    if (_image == null) return;
+
+    setState(() {
+      imgLoading = true;
+    });
+    Map imgLoadingBotResponse = {
+      'individual': 'bot',
+      'type': 'imgResponse',
+    };
+    appendChats(imgLoadingBotResponse);
+
+    const url = 'http://192.168.43.246:65432/image';
+
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+
+    var imageStream = http.ByteStream(_image!.openRead());
+    var length = await _image!.length();
+    var multipartFile = http.MultipartFile('image', imageStream, length,
+        filename: _image!.path.split('/').last);
+    request.files.add(multipartFile);
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      var responseBody = await response.stream.bytesToString();
+      var jsonResponse = json.decode(responseBody);
+      popTempChat(false);
+      Map botImgResponse = {
+        'individual': 'bot',
+        'text':
+            "CNN Result:\n${jsonResponse['bot_response_CNN']}\n\nResNet50 Result:\n${jsonResponse['bot_response_resNet']}\n(${jsonResponse['acc_resNet']}%)",
+      };
+      appendChats(botImgResponse);
+      Future.delayed(const Duration(seconds: 2), () {
+        setState(() {
+          imgLoading = false;
+        });
+      });
+    } else {
+      popTempChat(true);
+    }
   }
 
   void appendChats(Map chatMsg) {
@@ -101,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
         MediaQuery.of(context).padding.top);
 
     return Scaffold(
-      backgroundColor: AppColor.jet,
+      backgroundColor: AppColor.raisinBlack,
       appBar: AppBar(
         toolbarHeight: 80,
         backgroundColor: AppColor.mindaro,
@@ -126,6 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   msgHeight: msgHeight,
                   msg: msg,
                   image: _image,
+                  imgLoading: imgLoading,
                 ),
                 ErrorMsg(
                   errorMsg: errMsg,
