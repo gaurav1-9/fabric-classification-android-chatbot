@@ -1,2 +1,4 @@
 /Fabric Dataset
-/Classification
+/Classification/__pycache__
+/Classification/saved_model
+/Classification/saved_img
