@@ -145,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     double msgHeight = (MediaQuery.of(context).size.height -
-        (AppBar().preferredSize.height + 117) -
+        (AppBar().preferredSize.height + 123) -
         MediaQuery.of(context).padding.top);
 
     return Scaffold(

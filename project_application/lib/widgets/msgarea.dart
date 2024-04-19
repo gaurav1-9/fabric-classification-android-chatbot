@@ -89,7 +89,7 @@ class MsgArea extends StatelessWidget {
                               )
                     : Image.file(
                         msg[index]['img'],
-                        scale: 20,
+                        scale: 15,
                       ),
               ),
             ],
