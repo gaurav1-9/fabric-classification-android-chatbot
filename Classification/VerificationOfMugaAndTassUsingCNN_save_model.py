@@ -11,7 +11,7 @@ from torchvision import models, datasets
 import os
 
 def predict_loaded_modelCNN():
-    cnn_model_save_path = 'D:/code/7th_sem/Classification/Test/saved_model/cnn_model.h5'
+    cnn_model_save_path = r"D:\code\8th_Sem\fabric-classification-android-chatbot\Classification\saved_model\cnn_model.h5"
     loaded_model = load_model(cnn_model_save_path)
     input_image_path = r'D:\code\8th_Sem\fabric-classification-android-chatbot\Classification\saved_img\uploadedImage.jpg'
     img = image.load_img(input_image_path, target_size=(200, 200))
