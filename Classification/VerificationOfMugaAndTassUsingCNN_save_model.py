@@ -2,8 +2,11 @@ from keras.preprocessing import image
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from sklearn.metrics import roc_curve, auc
+import torch
+from torchvision import transforms
+from PIL import Image
+from torch.utils.data import DataLoader
+from torchvision import models, datasets
 
 import os
 
@@ -20,10 +23,10 @@ def predict_loaded_modelCNN():
 
     if prediction[0] < 0.5 :
         print(prediction[0])
-        return "This is an image of a Muga Fabric"
+        return "Muga"
     else:
         print(prediction[0])
-        return "This is an image of a Tass Fabric"
+        return "Tass"
 
 def predict_loaded_model_resNET():
     resnet_model_path = r'D:\code\8th_Sem\fabric-classification-android-chatbot\Classification\saved_model\resnet50_transfer_learning_model.h5'
@@ -41,7 +44,38 @@ def predict_loaded_model_resNET():
 
     return "This is an image of a Muga Fabric",float(prediction[0][prediction.argmax()])
 
+def predict_loaded_ViT_moddel():
+    transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    ])
+    
+    ViT_model_path = r"D:\code\8th_Sem\fabric-classification-android-chatbot\Classification\saved_model\ViT_savedModel.pth"
+    model = models.vision_transformer.vit_b_16(pretrained=False)
+    model.load_state_dict(torch.load(ViT_model_path))
+    model.eval()
+
+    input_image_path = r'D:\code\8th_Sem\fabric-classification-android-chatbot\Classification\saved_img\uploadedImage.jpg'
+
+    image = Image.open(input_image_path)
+    image = transform(image).unsqueeze(0)
+
+    with torch.no_grad():
+        outputs = model(image)
+
+    softmax = torch.nn.Softmax(dim=1)
+    probabilities = softmax(outputs).cpu().numpy()
+    predicted_class = torch.argmax(outputs).item()
+
+    print("{:.2f}".format(probabilities[0][predicted_class]*100),end='%')
+    if(predicted_class==0):
+        print("Predicted Class: Muga")
+        return "Muga",probabilities[0][predicted_class]*100
+    else:
+        print("Predicted Class: Tass")
+        return "Tass",probabilities[0][predicted_class]*100
+
+
 if __name__ == '__main__':
-    # Asus
-    train_data_dir = 'D:/code/7th_sem/Fabric Dataset/'
-    test_data_dir = 'D:/code/7th_sem/Fabric Dataset/'
+    pass

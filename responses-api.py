@@ -127,10 +127,13 @@ def img_response():
     file.save(filename)
     image_response_CNN = ip.predict_loaded_modelCNN()
     image_response_resNet = ip.predict_loaded_model_resNET()
+    image_response_ViT = ip.predict_loaded_ViT_moddel()
     processed_image_response = {
         'bot_response_CNN': image_response_CNN,
+        'bot_response_ViT': image_response_ViT[0],
         'bot_response_resNet': image_response_resNet[0],
-        'acc_resNet': f"{100*image_response_resNet[1]:.3}"
+        'acc_resNet': f"{100*image_response_resNet[1]:.3}",
+        'acc_ViT': f"{100*image_response_ViT[1]:.3}"
     }
     return jsonify(processed_image_response)
 
