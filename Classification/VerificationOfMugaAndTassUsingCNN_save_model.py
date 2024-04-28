@@ -1,12 +1,10 @@
 from keras.preprocessing import image
 import numpy as np
-import tensorflow as tf
 from tensorflow.keras.models import load_model
 import torch
 from torchvision import transforms
 from PIL import Image
-from torch.utils.data import DataLoader
-from torchvision import models, datasets
+from torchvision import models
 
 import os
 
