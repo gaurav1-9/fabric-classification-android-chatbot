@@ -7,65 +7,6 @@ from sklearn.metrics import roc_curve, auc
 
 import os
 
-def preprocessing(train_data_dir, test_data_dir, model_save_path):
-    train_datagen = ImageDataGenerator(
-        rescale=1./255,
-        rotation_range=40,
-        width_shift_range=0.2,
-        height_shift_range=0.2,
-        shear_range=0.2,
-        zoom_range=0.2,
-        horizontal_flip=True,
-        fill_mode='nearest')
-
-    validation_datagen = ImageDataGenerator(rescale=1/255)
-
-    train_generator = train_datagen.flow_from_directory(
-        train_data_dir,
-        target_size=(200, 200),
-        batch_size=120,
-        class_mode='binary')
-
-    validation_generator = validation_datagen.flow_from_directory(
-        test_data_dir,
-        target_size=(200, 200),
-        batch_size=19,
-        class_mode='binary',
-        shuffle=False)
-
-    model = tf.keras.models.Sequential([
-        tf.keras.layers.Flatten(input_shape=(200, 200, 3)),
-        tf.keras.layers.Dense(128, activation=tf.nn.relu),
-        tf.keras.layers.Dense(1, activation=tf.nn.sigmoid)])
-
-    model.summary()
-
-    model.compile(optimizer=tf.optimizers.Adam(),
-                  loss='binary_crossentropy',
-                  metrics=['accuracy'])
-
-    history = model.fit(train_generator,
-                        steps_per_epoch=3,
-                        epochs=5,
-                        verbose=1,
-                        validation_data=validation_generator,
-                        validation_steps=2)
-
-    model.save(model_save_path)
-
-    return model, validation_generator
-
-def evaluate_model(model, test_data_generator):
-    evaluation_result = model.evaluate(test_data_generator)
-    print("Evaluation Loss:", evaluation_result[0])
-    print("Evaluation Accuracy:", evaluation_result[1])
-
-    test_data_generator.reset()
-    preds = model.predict(test_data_generator, verbose=1)
-    fpr, tpr, _ = roc_curve(test_data_generator.classes, preds)
-    roc_auc = auc(fpr, tpr)
-    print("ROC AUC:", roc_auc)
-
 def predict_loaded_modelCNN():
     cnn_model_save_path = 'D:/code/7th_sem/Classification/Test/saved_model/cnn_model.h5'
     loaded_model = load_model(cnn_model_save_path)
