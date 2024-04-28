@@ -79,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (response.statusCode == 200) {
       var responseBody = await response.stream.bytesToString();
       var jsonResponse = json.decode(responseBody);
+      print(jsonResponse);
       popTempChat(false);
       Map botImgResponse = {
         'individual': 'bot',
