@@ -6,8 +6,6 @@ from torchvision import transforms
 from PIL import Image
 from torchvision import models
 
-import os
-
 def predict_loaded_modelCNN():
     cnn_model_save_path = r"D:\code\8th_Sem\fabric-classification-android-chatbot\Classification\saved_model\cnn_model.h5"
     loaded_model = load_model(cnn_model_save_path)
