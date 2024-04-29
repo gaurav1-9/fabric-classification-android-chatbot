@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
       Map botImgResponse = {
         'individual': 'bot',
         'text':
-            "CNN Result:\n${jsonResponse['bot_response_CNN']}\n\nResNet50 Result:\n${jsonResponse['bot_response_resNet']}\n(${jsonResponse['acc_resNet']}%)",
+            "CNN Result:\n${jsonResponse['bot_response_CNN']}\n\nResNet50 Result:\n${jsonResponse['bot_response_resNet']}\n(${jsonResponse['acc_resNet']}%)\n\nVision Transformer result:\n${jsonResponse['bot_response_ViT']}\n(${jsonResponse['acc_ViT']}%)",
       };
       appendChats(botImgResponse);
       Future.delayed(const Duration(seconds: 2), () {

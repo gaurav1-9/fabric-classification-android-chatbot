@@ -133,7 +133,7 @@ def img_response():
         'bot_response_ViT': image_response_ViT[0],
         'bot_response_resNet': image_response_resNet[0],
         'acc_resNet': f"{100*image_response_resNet[1]:.3}",
-        'acc_ViT': f"{100*image_response_ViT[1]:.3}"
+        'acc_ViT': f"{image_response_ViT[1]:.4}"
     }
     return jsonify(processed_image_response)
 

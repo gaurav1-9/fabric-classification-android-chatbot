@@ -67,10 +67,10 @@ def predict_loaded_ViT_moddel():
     print("{:.2f}".format(probabilities[0][predicted_class]*100),end='%')
     if(predicted_class==0):
         print("Predicted Class: Muga")
-        return "Muga",float(probabilities[0][predicted_class])
+        return "Muga","{:.4f}".format(probabilities[0][predicted_class]*100)
     else:
         print("Predicted Class: Tass")
-        return "Tass",float(probabilities[0][predicted_class])
+        return "Tass","{:.4f}".format(probabilities[0][predicted_class]*100)
 
 
 if __name__ == '__main__':
