@@ -83,7 +83,9 @@ class _HomeScreenState extends State<HomeScreen> {
       popTempChat(false);
       Map botImgResponse = {
         'individual': 'bot',
-        'text': Result(
+        'type': 'detailedViewer',
+        'text': jsonResponse['bot_response_ViT'],
+        'detailedText': Result(
           accViT: jsonResponse['acc_ViT'],
           accresNet: jsonResponse['acc_resNet'],
           resultCNN: jsonResponse['bot_response_CNN'],
@@ -91,7 +93,6 @@ class _HomeScreenState extends State<HomeScreen> {
           resultresNet: jsonResponse['bot_response_resNet'],
         )
       };
-      print(botImgResponse['text'].runtimeType);
       appendChats(botImgResponse);
       Future.delayed(const Duration(seconds: 2), () {
         setState(() {
@@ -154,6 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
     double msgHeight = (MediaQuery.of(context).size.height -
         (AppBar().preferredSize.height + 123) -
         MediaQuery.of(context).padding.top);
+    print(msg);
 
     return Scaffold(
       backgroundColor: AppColor.raisinBlack,
