@@ -73,20 +73,36 @@ class _MsgAreaState extends State<MsgArea> {
                                   )
                                 : SizedBox(
                                     width:
-                                        MediaQuery.of(context).size.width * .83,
+                                        MediaQuery.of(context).size.width * .74,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          "This is a ${widget.msg[index]['text']!} fabric",
-                                          style: TextStyle(
-                                            color: (widget.msg[index]
-                                                        ['individual'] ==
-                                                    'bot')
-                                                ? AppColor.jet
-                                                : AppColor.mindaro,
-                                            overflow: TextOverflow.ellipsis,
+                                        Text.rich(
+                                          TextSpan(
+                                            children: [
+                                              const TextSpan(
+                                                text: "This is a ",
+                                                style: TextStyle(
+                                                  color: AppColor.jet,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text:
+                                                    "${widget.msg[index]['text']}",
+                                                style: const TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: AppColor.jet,
+                                                  fontSize: 20,
+                                                ),
+                                              ),
+                                              const TextSpan(
+                                                text: " fabric",
+                                                style: TextStyle(
+                                                  color: AppColor.jet,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                         IconButton(
@@ -112,20 +128,36 @@ class _MsgAreaState extends State<MsgArea> {
                                 children: [
                                   SizedBox(
                                     width:
-                                        MediaQuery.of(context).size.width * .83,
+                                        MediaQuery.of(context).size.width * .74,
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          "This is a ${widget.msg[index]['detailedText']} fabric",
-                                          style: TextStyle(
-                                            color: (widget.msg[index]
-                                                        ['individual'] ==
-                                                    'bot')
-                                                ? AppColor.jet
-                                                : AppColor.mindaro,
-                                            overflow: TextOverflow.ellipsis,
+                                        Text.rich(
+                                          TextSpan(
+                                            children: [
+                                              const TextSpan(
+                                                text: "This is a ",
+                                                style: TextStyle(
+                                                  color: AppColor.jet,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text:
+                                                    "${widget.msg[index]['detailedText']}",
+                                                style: const TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 20,
+                                                  color: AppColor.jet,
+                                                ),
+                                              ),
+                                              const TextSpan(
+                                                text: " fabric",
+                                                style: TextStyle(
+                                                  color: AppColor.jet,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                         IconButton(

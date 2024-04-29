@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../global_properties/app_colors.dart';
+
 class Result extends StatelessWidget {
   final String resultCNN;
   final String resultresNet;
@@ -18,7 +20,7 @@ class Result extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * .83,
+      width: MediaQuery.of(context).size.width * .74,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -27,6 +29,7 @@ class Result extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 25,
+              color: AppColor.jet,
             ),
           ),
           Row(
@@ -35,10 +38,14 @@ class Result extends StatelessWidget {
                 "Predicted as: ",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  color: AppColor.jet,
                 ),
               ),
               Text(
                 resultCNN,
+                style: const TextStyle(
+                  color: AppColor.jet,
+                ),
               ),
             ],
           ),
@@ -49,6 +56,7 @@ class Result extends StatelessWidget {
             "ResNet50 Result:",
             style: TextStyle(
               fontWeight: FontWeight.bold,
+              color: AppColor.jet,
               fontSize: 25,
             ),
           ),
@@ -61,10 +69,14 @@ class Result extends StatelessWidget {
                     "Predicted as: ",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
+                      color: AppColor.jet,
                     ),
                   ),
                   Text(
                     resultresNet,
+                    style: const TextStyle(
+                      color: AppColor.jet,
+                    ),
                   ),
                 ],
               ),
@@ -74,10 +86,14 @@ class Result extends StatelessWidget {
                     "Accuracy: ",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
+                      color: AppColor.jet,
                     ),
                   ),
                   Text(
                     "$accresNet%",
+                    style: const TextStyle(
+                      color: AppColor.jet,
+                    ),
                   ),
                 ],
               ),
@@ -87,15 +103,16 @@ class Result extends StatelessWidget {
             height: 25,
           ),
           const Text(
-            "Vision Transformer (ViT)\nResult:",
+            "Vision Transformer (ViT) Result:",
             style: TextStyle(
               height: 1,
               fontWeight: FontWeight.bold,
+              color: AppColor.jet,
               fontSize: 25,
             ),
           ),
           const SizedBox(
-            height: 5,
+            height: 10,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,10 +123,14 @@ class Result extends StatelessWidget {
                     "Predicted as: ",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
+                      color: AppColor.jet,
                     ),
                   ),
                   Text(
                     resultViT,
+                    style: const TextStyle(
+                      color: AppColor.jet,
+                    ),
                   ),
                 ],
               ),
@@ -119,10 +140,14 @@ class Result extends StatelessWidget {
                     "Accuracy: ",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
+                      color: AppColor.jet,
                     ),
                   ),
                   Text(
                     "$accViT%",
+                    style: const TextStyle(
+                      color: AppColor.jet,
+                    ),
                   ),
                 ],
               ),
