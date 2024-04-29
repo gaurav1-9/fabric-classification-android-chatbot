@@ -7,6 +7,7 @@ import 'package:project_application/widgets/errormsg.dart';
 import 'package:http/http.dart' as http;
 
 import '../widgets/msgarea.dart';
+import '../widgets/result.dart';
 import '../widgets/userinput_field.dart';
 import '../global_properties/app_colors.dart';
 import '../widgets/appbar.dart';
@@ -79,13 +80,18 @@ class _HomeScreenState extends State<HomeScreen> {
     if (response.statusCode == 200) {
       var responseBody = await response.stream.bytesToString();
       var jsonResponse = json.decode(responseBody);
-      print(jsonResponse);
       popTempChat(false);
       Map botImgResponse = {
         'individual': 'bot',
-        'text':
-            "CNN Result:\n${jsonResponse['bot_response_CNN']}\n\nResNet50 Result:\n${jsonResponse['bot_response_resNet']}\n(${jsonResponse['acc_resNet']}%)\n\nVision Transformer result:\n${jsonResponse['bot_response_ViT']}\n(${jsonResponse['acc_ViT']}%)",
+        'text': Result(
+          accViT: jsonResponse['acc_ViT'],
+          accresNet: jsonResponse['acc_resNet'],
+          resultCNN: jsonResponse['bot_response_CNN'],
+          resultViT: jsonResponse['bot_response_ViT'],
+          resultresNet: jsonResponse['bot_response_resNet'],
+        )
       };
+      print(botImgResponse['text'].runtimeType);
       appendChats(botImgResponse);
       Future.delayed(const Duration(seconds: 2), () {
         setState(() {

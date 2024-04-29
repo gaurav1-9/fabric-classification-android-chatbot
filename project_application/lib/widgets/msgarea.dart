@@ -52,15 +52,17 @@ class MsgArea extends StatelessWidget {
                 ),
                 child: (msg[index]['img'] == null)
                     ? (msg[index]['type'] == null)
-                        ? Text(
-                            msg[index]['text']!,
-                            style: TextStyle(
-                              color: (msg[index]['individual'] == 'bot')
-                                  ? AppColor.jet
-                                  : AppColor.mindaro,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          )
+                        ? (msg[index]['text'].runtimeType == String)
+                            ? Text(
+                                msg[index]['text']!,
+                                style: TextStyle(
+                                  color: (msg[index]['individual'] == 'bot')
+                                      ? AppColor.jet
+                                      : AppColor.mindaro,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              )
+                            : msg[index]['text']
                         : (imgLoading == true)
                             ? const Row(
                                 children: [

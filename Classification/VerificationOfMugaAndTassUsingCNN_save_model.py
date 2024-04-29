@@ -38,7 +38,7 @@ def predict_loaded_model_resNET():
     prediction = resnet_model.predict(images)
     print(prediction[0])
 
-    return "This is an image of a Muga Fabric",float(prediction[0][prediction.argmax()])
+    return "Muga",float(prediction[0][prediction.argmax()])
 
 def predict_loaded_ViT_moddel():
     transform = transforms.Compose([
