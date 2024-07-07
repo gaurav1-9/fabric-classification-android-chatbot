@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fabric Classification</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="CSS/global-properties.css">
+    <link rel="stylesheet" href="CSS/chatbot-footer-style.css">
+    <link rel="stylesheet" href="CSS/chatbot-header-style.css">
+    <link rel="stylesheet" href="CSS/msgs.css">
+    <link rel="stylesheet" href="CSS/buttons.css">
+    <link rel="stylesheet" href="CSS/display-selected-img.css">
+    <link rel="stylesheet" href="CSS/Filter_style/side-bar-&-overlay.css">
+    <link rel="stylesheet" href="CSS/Filter_style/flt-btns.css">
+    <link rel="stylesheet" href="CSS/Filter_style/flt-msg.css">
+    <link rel="stylesheet" href="CSS/Filter_style/flt-img.css">
+</head>
+
+<body>
+    <div class="header collapse-animation-rev">
+        <div class="col main">
+            <h1>FABRIC CLASSIFICATION</h1>
+            <div class="row">
+                <span class="longer-word yellow-green">CHATBO</span>
+                <span class="yellow-green">T</span>
+            </div>
+        </div>
+        <div class="header-desc">
+            <p class="brief">
+                This CHATBOT aims to create an automated system using cutting-edge computer vision algorithms to
+                identify and detect the fabric image which is <span class="center">provided by the user.</span>
+            </p>
+            <p class="small brief">
+                Say <span class="yellow-green smallHI">'HI'</span> to initiate the bot
+            </p>
+        </div>
+    </div>
+
+    <div class="chatbot">
+        <ul class="msgs"></ul>
+        <div class="confirmation-upload">
+            <div class="btn upload_menu">
+                <div class="row">
+                    <input type="file" id="image-upload" accept=".jpg, .jpeg, .png" style="display: none;">
+                    <button class="raisin-black-btn" onclick="chooseImage()">Choose an image</button>
+                    <button class="raisin-black-btn" id="cancel" onclick="cancelUpload()">Cancel</button>
+                </div>
+                <div class="img-show row">
+                    <img src="" id='img-show'>
+                    <button class="raisin-black-btn process-img-btn" onclick="processingImage()">
+                        <i class='bx bxs-right-arrow-circle'></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <footer>
+        <div class="input-area prompt-field">
+            <div class="row server-warning"></div>
+            <div class="row input-container">
+                <input type="text" placeholder="Enter your message here..." id="msg-box" autocomplete="off">
+                <button id="send-btn" onclick="botInitiate()">
+                    <i class='bx bxs-send'></i>
+                </button>
+            </div>
+            <div class="desc show_elements">
+                <p>
+                    <span class="capabilities">Click here</span>
+                    to know what capabilities I have
+                </p>
+            </div>
+        </div>
+        <div class="input-area revive-btn hide">
+            <div class="col caps">
+                <p>I'm exhausted<i class='bx bx-ghost'></i><br>I'm limited to process only one image at a time</p>
+                <button class="raisin-black-btn" onclick="botRevive()">Revive me</button>
+            </div>
+        </div>
+        <div class="info show_elements">
+            <div class="info_details">
+                <table>
+                    <thead>
+                        <th>Description</th>
+                        <th>Code</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>for upload image button</td>
+                            <td>'image' or 'picture'</td>
+                        </tr>
+                        <tr>
+                            <td>for chat termination</td>
+                            <td>'exit' or 'bye'</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <i class='bx bx-info-circle info_btn'></i>
+        </div>
+        <div class="filter_info">
+            <i class='bx bxs-magic-wand filter_btn'></i>
+            <div class="flt_details">
+                show filters
+            </div>
+        </div>
+        <div id="filter_tab" class="flt_tab_slide_right">
+            <div class="overlay overlay-off"></div>
+            <div class="flt_tab">
+                <div class="flt-navbar">
+                    <p class="flt-heading">FILTER OUTPUT</p>
+                    <i class='bx bxs-left-arrow' id="exit"></i>
+                </div>
+                <div class="application-area scrollToBottom">
+                    <ul class="flt_msg">
+                    </ul>
+                    <!-- <div class="flt-user-msg">
+                            <p class="flt-user-msg-content">Im a users</p>
+                        </div> -->
+                    <div class="flt-start-upload">
+                        <div class="flt-bot-msg-content">
+                            <input type="file" id="flt-image-upload" accept=".jpg, .jpeg, .png" style="display: none;">
+                            <button class="raisin-black-btn" onclick="fltChooseImage()" id="flt-img-choose">
+                                <div class="row">
+                                    <i class='bx bxs-image-add'></i>
+                                    <p>Choose an image</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="fltImgShow">
+                        <div class="flt-user-msg-content">
+                            <img src="" id="fltImgShow">
+                            <button id="flt-img-proceed" class="raisin-black-btn" onclick="fltImgProceed()">Proceed</button>
+                        </div>
+                    </div>
+                    <div class="fltAppliedImg">
+                        <div class="flt-bot-msg-content" style="margin: 0 30px 30px 30px;width: 48vh;">
+                            <h2 style="color: var(--jet);">Gaussian filter</h2>
+                            <img src="" id="fltImgShow1" style="display: none; margin-bottom: 40px;">
+                            <h2 style="color: var(--jet);">Median filter</h2>
+                            <img src="" id="fltImgShow2" style="display: none; margin-bottom: 40px;">
+                            <h2 style="color: var(--jet);">Sharpenning filter</h2>
+                            <img src="" id="fltImgShow3" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </footer>
+
+</body>
+<script src="JS/enterButton.js"></script>
+<script src="JS/showDetails.js"></script>
+<script src="JS/appendChats.js"></script>
+<script src="JS/showCapabilities.js"></script>
+<script src="JS/botResponses.js"></script>
+<script src="JS/botInitiation.js"></script>
+<script src="JS/analyzeInput.js"></script>
+<script src="JS/imageUpload.js"></script>
+<script src="JS/cancelUpload.js"></script>
+<script src="JS/chooseImage.js"></script>
+<script src="JS/imageFinalized.js"></script>
+<script src="JS/botRestart.js"></script>
+<script src="JS/FilterTab/fltAppendChats.js"></script>
+<script src="JS/FilterTab/fltTabShowHide.js"></script>
+<script src="JS/FilterTab/fltChooseImage.js"></script>
+<script src="JS/FilterTab/fltImgProceed.js"></script>
+
+</html>

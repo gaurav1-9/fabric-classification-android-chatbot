@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <form action="" enctype="multipart/form-data"> -->
+    <label for="flt_img">Select an image</label>
+    <input type="file" id="flt_img" onchange="imgInput(event)">
+    <br>
+    <br>
+    <button id="sub" onclick="sendImg()">Submit</button>
+    <!-- </form> -->
+</body>
+
+</html>
+
+<script>
+    var img_name = ''
+    function imgInput(event) {
+        img_name = event.target.files[0]
+    }
+    function sendImg() {
+        if (img_name.name != '') {
+            fetch(`http://127.0.0.1:65432/flt?image_name=${img_name.name}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Done")
+                })
+            }
+    }
+</script>

@@ -105,17 +105,19 @@ def chatbot():
     return jsonify(chat_response)
 
 
-# @app.route("/image", methods=['GET'])
-# def img_response():
-#     file_name = request.args.get('image_name')
-
-#     processed_image_response = {
-#         'image_name': file_name,
-#         'bot_response': image_response
-#     }
-#     return jsonify(processed_image_response)
-@app.route("/image", methods=['POST'])
+@app.route("/image", methods=['GET'])
 def img_response():
+    file_name = request.args.get('image_name')
+    image_response = ip.predict_loaded_model(file_name)
+
+    processed_image_response = {
+        'image_name': file_name,
+        'bot_response': image_response
+    }
+    return jsonify(processed_image_response)
+
+@app.route("/image-mob", methods=['POST'])
+def img_response_mob():
     if 'image' not in request.files:
         return jsonify({'error': 'No file part'}), 400
 
@@ -138,6 +140,6 @@ def img_response():
     return jsonify(processed_image_response)
 
 if __name__ == '__main__':
-    host= '192.168.43.246'
+    host= '0.0.0.0'
     port=65432
     app.run(debug=True,host=host,port=port)

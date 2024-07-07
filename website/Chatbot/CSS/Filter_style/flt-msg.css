@@ -1,0 +1,76 @@
+li {
+    list-style-type: none;
+}
+.flt-user-msg {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin: 10px 30px;
+    animation: flt-user-msg 0.3s ease-in-out;
+}
+
+.flt-user-msg-content {
+    margin: 10px 30px;
+    color: var(--white);
+    background-color: var(--jet);
+    padding: 10px;
+    border-radius: 10px;
+    border-bottom-right-radius: 0px;
+    overflow-x: hidden;
+}
+
+.flt-bot-msg {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin: 10px 30px;
+    animation: flt-bot-msg 0.3s ease-in-out;
+}
+
+.flt-bot-msg-content {
+    color: var(--raisin-black);
+    background-color: var(--mindaro) ;
+    padding: 10px;
+    border-radius: 10px;
+    border-bottom-left-radius: 0px;
+    overflow-x: hidden;
+}
+.application-area::-webkit-scrollbar {
+    width: 1.2vh;
+    display: block;
+
+}
+
+.application-area::-webkit-scrollbar-thumb {
+    background-color: var(--raisin-black-lighter);
+    border-radius: 10px;
+}
+
+.application-area::-webkit-scrollbar-thumb:hover {
+    background-color: var(--platinum);
+}
+
+.application-area.scrollToBottom {
+    scroll-behavior: smooth;
+}
+
+@keyframes flt-bot-msg{
+    0%{
+        transform: translateX(-10%);
+        opacity:0;
+    }
+    100%{
+        transform: translateX(0%);
+        opacity:1;
+    }
+}
+@keyframes flt-user-msg{
+    0%{
+        transform: translateX(10%);
+        opacity:0;
+    }
+    100%{
+        transform: translateX(0%);
+        opacity:1;
+    }
+}

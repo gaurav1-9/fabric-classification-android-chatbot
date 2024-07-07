@@ -1,0 +1,34 @@
+:root {
+    --white: #ffffffff;
+    --platinum: #dadadadc;
+    --yellow-green: #abc853ff;
+    --mindaro: #d7fe62ff;
+    --jet: #343541ff;
+    --raisin-black: #272727ff;
+    --raisin-black-opacity: #272727d2;
+    --raisin-black-lighter: #777777ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    color: var(--white)
+}
+
+*::selection{
+    background-color: var(--raisin-black);
+}
+
+body {
+    background-color: var(--jet);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.col{
+    display: flex;
+    flex-direction: column;
+}

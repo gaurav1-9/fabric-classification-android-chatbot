@@ -1,0 +1,38 @@
+.btn{
+    margin: 30px 0 10px 0;
+    width: 100%;
+}
+.raisin-black-btn{
+    background-color: var(--raisin-black);
+    border-radius: 10px;
+    border: 0;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-right: 10px;
+}
+.upload_btn{
+    display: flex;
+    justify-content: left;
+    align-items: start;
+}
+.raisin-black-btn:hover{
+    background-color: var(--raisin-black-opacity);
+    transform: scale(1.03);
+}
+.bxs-image-add{
+    margin: 0 5px;
+    font-size: 25px;
+}
+.width{
+    width: 100%;
+}
+.width p{
+    width: 100%;
+}
+.confirmation-upload{
+    display: none;
+}

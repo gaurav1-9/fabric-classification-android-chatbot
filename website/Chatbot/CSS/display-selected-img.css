@@ -1,0 +1,18 @@
+#img-show{
+    height: 305px;
+    width: 305px;
+    border-radius: 10px;
+    background-size: cover;
+    box-shadow: 0 0 10px 3px var(--raisin-black-opacity);
+}
+.img-show{
+    margin: 15px 0 0 0 ;
+    display: none;
+    align-items: center;
+}
+.process-img-btn{
+    margin: 0 20px;
+}
+.bxs-right-arrow-circle{
+    font-size: 30px;
+}

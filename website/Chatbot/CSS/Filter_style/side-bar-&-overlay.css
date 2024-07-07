@@ -1,0 +1,117 @@
+.overlay {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-color: rgba(62, 62, 62, 0.228);
+    backdrop-filter: blur(3px);
+}
+.overlay-on{
+    animation: opacity_blr 1s ease-in-out;
+}
+.overlay-off{
+    animation: opacity_blr_rev 1s ease-in-out;
+}
+
+#filter_tab {
+    position: fixed;
+    height: 100vh;
+    width: 45vw;
+    bottom: 0px;
+    left: 0px;
+    background-color: var(--raisin-black);
+    border: 0;
+    z-index: 10;
+    border-top-right-radius: 20px;
+    box-shadow: 4px 0 10px 2px var(--raisin-black-opacity);
+}
+.application-area{
+    height: 88vh;
+    background-color: var(--raisin-black); 
+    border-bottom-right-radius: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.flt-navbar {
+    height: 12vh;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    background-color: var(--mindaro);
+    display: flex;
+    justify-content: space-between;
+    border-top-right-radius: 20px;
+    font-size: 40px;
+}
+.flt-heading{
+    color: var(--raisin-black);
+    font-weight: bold;
+}
+#exit {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 25px;
+    color: var(--raisin-black-opacity);
+    margin: 0 5px;
+    transition: 0.3s;
+}
+#exit:hover{
+    color: var(--raisin-black-lighter);
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.flt_tab {
+    z-index: 10;
+    height: 100vh;
+}
+
+.flt_tab_slide_left {
+    animation: slide_left 0.4s ease-in-out;
+}
+
+.flt_tab_slide_right {
+    animation: slide_right 0.4s ease-in-out;
+}
+
+@keyframes slide_left {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes slide_right {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100%{
+        transform: translateX(0%);
+    }
+}
+@keyframes opacity_blr {
+    0%{
+      opacity: 0;
+      backdrop-filter: blur(0);
+    }
+    100%{
+      opacity: 1;
+      backdrop-filter: blur(2px);
+    }
+  }
+@keyframes opacity_blr_rev {
+    0%{
+      opacity: 1;
+      backdrop-filter: blur(2px);
+    }
+    100%{
+      opacity: 0;
+      backdrop-filter: blur(0);
+    }
+  }
